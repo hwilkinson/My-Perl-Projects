@@ -1,0 +1,19 @@
+#!C:\strawberry\perl\
+
+# MS Access Module
+use strict;
+use Win32::OLE qw(in with);
+use Win32::OLE::Const;
+use Win32::OLE::Const 'Microsoft Access';
+
+$Win32::OLE::Warn = 3;
+
+my $filename = '\\\winntdom\root\common\IMFT\Lehi\Secure\SupplyChainMGMT\SharePoint\ATCP\_htm\Scenario_team\scenario_status.accdb';
+my $Access = Win32::OLE->CreateObject('Access.Application');
+my $db = $Access->OpenCurrentDatabase($filename);
+
+$Access->{DoCmd}->RunMacro("Macro1");
+$Access->{DoCmd}->Quit;
+
+
+exit;
