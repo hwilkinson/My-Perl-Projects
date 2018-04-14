@@ -1,0 +1,25 @@
+#!C:\strawberry\perl\
+
+
+# MS Excel Module
+use strict;
+use Win32::OLE qw(in with);
+use Win32::OLE::Const;
+use Win32::OLE::Const 'Microsoft Excel';
+
+$Win32::OLE::Warn = 3;
+
+my $filename = '\\\winntdom\root\common\IMFT\Lehi\Secure\SupplyChainMGMT\SharePoint\ATCP\_htm\Scenario_team\data_archive.xlsm';
+my $Excel = Win32::OLE->CreateObject('Excel.Application') || Win32::OLE->new('Excel.Application', 'Quit'); 
+my $Book = $Excel->Workbooks->Open( $filename );
+$Excel->Run("get_data");
+$Book->Close;
+
+chdir('\\\winntdom\root\common\IMFT\Lehi\Secure\SupplyChainMGMT\SharePoint\ATCP\_htm\Scenario_team');
+my @files = ('queryCompleteDate.xlsx','queryCompleteScenarios.xlsx','queryOnTime.xlsx','queryOpenScenarios.xlsx');
+foreach my $file ( @files ) {
+unlink $file;
+
+}
+
+exit;
